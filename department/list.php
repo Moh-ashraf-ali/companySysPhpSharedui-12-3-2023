@@ -6,7 +6,8 @@ include '../public/navbar.php';
 include '../App/confige.php';
 include '../App/function.php';
 check($conn , "connection");
-auth();
+auth(2,3);
+
 
 $select = "SELECT * FROM `department`";
 $ss = mysqli_query($conn , $select);

@@ -3,7 +3,7 @@
 include '/xampp/htdocs/sharedui/public/head.php';
 include '/xampp/htdocs/sharedui/public/navbar.php';
 include '/xampp/htdocs/sharedui/App/function.php';
-auth();
+auth(2,3);
 
 
 ?>

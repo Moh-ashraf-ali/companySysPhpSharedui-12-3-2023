@@ -7,9 +7,9 @@ include '../App/confige.php';
 include '../App/function.php';
 // check connection
 check($conn , "connection");
-auth();
+auth(2);
 
-// select from view important
+// select from view 
 $select = "SELECT * FROM  `empwithdept`";
 $ss = mysqli_query($conn , $select);
 check($ss , "select");
@@ -72,7 +72,7 @@ foreach($ss as $data):?>
 
      <th> <a href="/sharedui/employee/edit.php?edit=<?=  $data['empId'] ?>"> <i style="color: blue;"  class="fa-solid fa-pen-to-square"></a></i>  </th>
      <th> <a onclick="return confrim('Are you sure ?')" href="/sharedui/employee/list.php?remove=<?=  $data['empId'] ?>"><i style="color: red;" class="fa-solid fa-trash"></i></a> </th>
-
+     <th> <a  href="/sharedui/employee/show.php?show=<?=  $data['empId'] ?>"><i class="fa-sharp fa-solid fa-eye"></i></a> </th>
 </tr>
 
 <?php endforeach ; ?>

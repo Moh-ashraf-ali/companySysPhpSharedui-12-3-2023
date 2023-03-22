@@ -5,8 +5,8 @@ include '../public/navbar.php';
 
 include '../App/confige.php';
 include '../App/function.php';
-auth();
-
+auth(2);
+$errors = [];
 if(isset($_GET['edit'])){
 $editid = $_GET['edit'];
 $seledit = "select * from `employee` where id = $editid";
@@ -33,11 +33,18 @@ if(empty($_FILES['emp-image']['name'])){
   move_uploaded_file($imagetmpname , $location);
   unlink("./upload/".$sss['image']);
 }
-
-
+if(stringValidation($empname)){
+  $errors[]= " please enter valid Name >3  ";
+}   
+if(numValidation($empsalary)){
+$errors[]= " please enter positive and integer and valid  number  ";
+}
+if(empty($errors)){
 $update = "UPDATE `employee` SET `emp-name`='$empname', `image` = '$imageName' ,`salary`=$empsalary,`dept-id`=$empdept WHERE id = $editid";
  $e = mysqli_query($conn,$update);
 header("location:list.php");
+
+}
 }
 }
 
@@ -46,6 +53,17 @@ header("location:list.php");
 <h1 class="text-center text-success  pt-5 mt-5" >Edit Department Page</h1>
 
 <div class="container mt-4 col-md-6">
+<?php if(!empty($errors)) :?>
+<div class="alert alert-danger">
+    <ul>
+        <?php foreach($errors as $data) :?>
+            <li><?= $data?></li>
+            <?php endforeach ; ?>
+    </ul>
+</div>
+
+
+        <?php endif ; ?>
 <div class="card bg-dark">
     <div class="card-body">
         <form method="post" enctype="multipart/form-data">

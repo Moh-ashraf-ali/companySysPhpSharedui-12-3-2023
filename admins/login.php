@@ -1,6 +1,6 @@
 <?php
 include '../public/head.php';
-include '../public//navbar.php';
+include '../public/navbar.php';
 
 
 // connect db
@@ -10,12 +10,15 @@ include '../App/function.php';
 
 if(isset($_POST['login'])){
     $username = $_POST['username'];
-    $password = $_POST['password'];
-    $sel = "select * from admin where name = '$username' and password = '$password'";
+    $password = sha1($_POST['password']);
+    $sel = "select * from `admin` where `name` = '$username' and `password` = '$password'";
     $s = mysqli_query($conn , $sel);
+    $row = mysqli_fetch_assoc( $s );
     $numOfRow = mysqli_num_rows($s);
     if($numOfRow == 1){
         $_SESSION['admin'] =  "$username" ;
+        $_SESSION['roles'] = $row['role'];
+        $_SESSION['id'] = $row['id'];
    path("index.php");   
     }else{
         path("admins/login.php");   
@@ -24,7 +27,9 @@ if(isset($_POST['login'])){
 
 }
 
-
+if(isset($_SESSION['admin'])){
+    path("/");
+}
 ?>
 <h1 class="text-center text-success  pt-5 mt-5" >Login Page</h1>
 <div class="container mt-4 col-md-6">

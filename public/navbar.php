@@ -25,6 +25,9 @@ session_start();
                 <li class="nav-item active">
                     <a class="nav-link" href="/sharedui/index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/sharedui/admins/yourprofile.php">Your profile <span class="sr-only">(current)</span></a>
+                </li>
                 <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
           Department
@@ -46,7 +49,18 @@ session_start();
         </div>
         
       </li>
-
+      <?php if($_SESSION['roles'] ==1): ?>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          Admins
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/sharedui/admins/add.php">Add admin</a>
+          <a class="dropdown-item" href="/sharedui/admins/list.php">List admin</a>
+        </div>
+        
+      </li>
+<?php endif ;   ?>
   
 </ul>
 <?php endif; ?>

@@ -7,7 +7,7 @@ include '../App/confige.php';
 include '../App/function.php';
 // check connection
 check($conn , "connection");
-auth();
+auth(2);
 
 // select from view important
 if(isset($_POST['searchButton'])){
@@ -59,7 +59,7 @@ foreach($ss as $data):?>
     <th>  <img width="80px" src="./upload/<?=$data['empImage'] ?>" alt=""></th>  
      <th> <?=  $data['deptName'] ?> </th>
 
-     <th> <a href="/sharedui/employee/edit.php?edit=<?=  $data['empId'] ?>"> <i style="color: blue;"  class="fa-solid fa-pen-to-square"></a></i>  </th>
+     <th> <a href="/sharedui/employee/edit.php?edit=<?=$data['empId'] ?>"> <i style="color: blue;"  class="fa-solid fa-pen-to-square"></a></i>  </th>
      <th> <a onclick="return confrim('Are you sure ?')" href="/sharedui/employee/list.php?remove=<?=  $data['empId'] ?>"><i style="color: red;" class="fa-solid fa-trash"></i></a> </th>
 
 </tr>
